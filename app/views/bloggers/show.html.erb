@@ -1,0 +1,20 @@
+<h1><%=@blogger.name%></h1>
+
+<%@blogger.posts.each do |t|%>
+    <% @total = [] %>
+    <% @total << t.likes %>
+    <%end%>
+       <%= @total.join.sum %> total likes<br>
+
+<% @max_liked = @blogger.posts.max_by do |p|%>
+    <% p.likes %>
+<%end%>
+   Featured Post: <%= link_to @max_liked.title, post_path(@max_liked) %>
+
+<ul>
+<% @top_five_dest = @blogger.destinations.max(5) %>
+Top Five Places Written About: 
+<li><%=@top_five_dest.map {|n| n.name}%></li>
+</ul>
+
+

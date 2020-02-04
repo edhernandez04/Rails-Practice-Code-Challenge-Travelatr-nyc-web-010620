@@ -1,0 +1,29 @@
+<h1><%=@destination.name%></h1>
+
+<% @max_liked = @destination.posts.max_by do |p|%>
+    <% p.likes %>
+<%end%>
+   Featured Post: <%= link_to @max_liked.title, post_path(@max_liked) %>
+<br>
+
+
+ <%@avg_array = []%>
+<%@destination.bloggers.uniq.each do |bls|%>
+    <%@avg_array << bls.age %>
+<%end%>
+Bloggers Average Age
+<%=@avg_array.inject{ |sum, el| sum + el }.to_f / @avg_array.size%>
+
+<br><br>
+Most Recent Posts
+
+<%sorted_create = @destination.posts.sort_by {|t|t.created_at}%>
+
+<% sorted_create.reverse.each do |sc| %>
+<ul>
+<li><%= link_to sc.title, post_path(sc) %></li>
+</ul>
+<%end%>
+
+
+

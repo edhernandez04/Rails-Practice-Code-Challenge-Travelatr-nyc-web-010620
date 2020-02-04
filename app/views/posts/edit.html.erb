@@ -1,0 +1,9 @@
+<h1>Edit Your Post</h1>
+
+<%= form_for @post do |f| %>
+    Title: <%= f.text_field :title %>
+    Blogger: <%= f.collection_select :blogger_id, Blogger.all, :id, :name %>
+    Destination: <%= f.collection_select :destination_id, Destination.all, :id, :name %>
+    <br><br>Content:<br> <%= f.text_area :content %><br>
+    <%=f.submit%>
+<%end%>
